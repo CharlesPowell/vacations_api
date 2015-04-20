@@ -4,113 +4,124 @@ Bundler.require()
 # ** Connection **
 ActiveRecord::Base.establish_connection(
   :adapter  => "postgresql",
-  :database => "todo_list")
+  :database => "vacations_db")
 
 # ** Models **
 require './models/visit.rb'
 
-get '/get/users' do
-  content_type :json
-  User.all.to_json
+get '/' do
+  erb :index
 end
 
-get '/get/users/:id' do
+get '/api/users' do
   content_type :json
-  User.find(params[:id]).to_json
+  users = User.all
+  users.to_json
 end
 
-post '/get/users' do
+get '/api/users/:id' do
   content_type :json
-  User.create(params[:user]).to_json
-  #user =
-  # user.to_json
+  user = User.find(params[:id])
+  user.to_json
 end
 
-put '/get/users' do
+post '/api/users' do
   content_type :json
-  user = User.find(:id)
+  user = User.create(params[:user])
+  user.to_json
+end
+
+put '/api/users/:id' do
+  content_type :json
+  user = User.find(params[:id])
   user.update(paraams[:user])
   user.to_json
 end
 
-patch '/get/users' do
+patch '/api/users/:id' do
   content_type :json
-  user = User.find(:id)
+  user = User.find(params[:id])
   user.update(paraams[:user])
   user.to_json
 end
 
-delete '/get/users' do
+delete '/api/users/:id' do
   content_type :json
-  user = User.find(:id)
+  user = User.find(params[:id])
   user.destroy
 end
 
-get '/get/locations' do
+get '/api/locations' do
   content_type :json
-  Location.all.to_json
+  loc = Location.all
+  loc.to_json
 end
 
-get '/get/locations/:id' do
+get '/api/locations/:id' do
   content_type :json
-  Location.find(params[:id]).to_json
+  loc = Location.find(params[:id])
+  loc.to_json
 end
 
-post '/get/locations' do
+post '/api/locations' do
   content_type :json
-  Location.create(params[:location]).to_json
+  loc = Location.create(params[:location])
+  loc.to_json
 end
 
-put '/get/locations' do
+put '/api/locations/:id' do
   content_type :json
-  loc = Location.find(:id)
+  loc = Location.find(params[:id])
   loc.update(params[:location])
   loc.to_json
 end
 
-patch '/get/locations' do
+patch '/api/locations/:id' do
   content_type :json
-  loc = Location.find(:id)
+  loc = Location.find(params[:id])
   loc.update(params[:location] )
   loc.to_json
 end
 
-delete '/get/locations' do
+delete '/api/locations/:id' do
   content_type :json
-  loc = User.find(:id)
+  loc = Location.find(params[:id])
   loc.destroy
 end
 
-get '/get/visits' do
+get '/api/visits' do
   content_type :json
-  Visit.all.to_json
+  visits = Visit.all
+  visits.to_json
 end
 
-get '/get/visits/:id' do
+get '/api/visits/:id' do
   content_type :json
-  Visit.find(params[:id]).to_json
+  visit = Visit.find(params[:id])
+  visit.to_json
 end
 
-post '/get/visits' do
+post '/api/visits' do
   content_type :json
-  Visit.create(params[:visit]).to_json
+  visit = Visit.create(params[:visit])
+  visit.to_json
 end
 
-put '/get/visits' do
+put '/api/visits/:id' do
   content_type :json
-  visit = Visit.find(:id)
+  visit = Visit.find(params[:id])
   visit.update(params[:visit])
   visit.to_json
 end
 
-patch '/get/visits' do
+patch '/api/visits/:id' do
   content_type :json
-  visit = Visit.find(:id)
+  visit = Visit.find(params[:id])
   visit.update(params[:user])
   visit.to_json
 end
 
-delete '/get/visits' do
+delete '/api/visits/:id' do
   content_type :json
   visit = Visit.create(params[:visit])
   visit.destroy
